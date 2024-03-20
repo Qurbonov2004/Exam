@@ -227,18 +227,3 @@ def order(request):
     cart.is_active=False
     cart.save()
     return Response(status=status.HTTP_202_ACCEPTED)
-# USER
-# Register -> POST
-# Log in -> POST
-# Log out -> PUT
-# Edit Profile -> PUT
-# Delete Profile -> DELETE
-
-    # ALL products -> GET
-    # Product detail -> GET
-    # Add Product to wishlsit -> POST
-    # Remove Product from wishlist -> POST 
-    # Give Review -> POST
-    # Add Product to Cart -> POST
-# Order Cart - POST
-# Cancel Order - POST
