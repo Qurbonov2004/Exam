@@ -1,21 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,User
 from functools import reduce
-from django.contrib.auth.models import Group, Permission
-
-
-
-
-class User(AbstractUser):
-    icon = models.ImageField(upload_to='customer_image/', blank=True, null=True)
-    
 
 
 
 
 class Category(models.Model):
     title=models.CharField(max_length=255, unique=True)
-
 
     def __str__(self):
         return self.title
@@ -43,7 +34,6 @@ class Product(models.Model):
             result=0
         return result
     
-
     def __str__(self):
         return self.name
     
@@ -96,12 +86,9 @@ class Cart(models.Model):
     customer=models.ForeignKey(User,on_delete=models.CASCADE)
     products=models.ManyToManyField('CartProduct', related_name='cart_items')
 
-
-
     @property
     def quantity(self):
         return self.products.count()
-
 
     @property
     def total_price(self):
@@ -109,9 +96,12 @@ class Cart(models.Model):
         return total_price
 
 
+
 class CartProduct(models.Model):
     cart=models.ForeignKey(Cart, on_delete=models.CASCADE)
     product=models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+
+
 
 
 class Order(models.Model):
